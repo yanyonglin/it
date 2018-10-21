@@ -40,5 +40,35 @@
   cat /var/lib/jenkins/secrets/initialAdminPassword
   将默认密码输入，点击右下角continue 
   选择 install suggest plugins
-  稍等片刻，jenkins初始化完毕
+  稍等片刻
+  填入用户和密码，点击继续
+  
+  需要初始化两个插件 	Maven Integration plugin 和 Deploy to container Plugin
+  
+  jenkins初始化完毕
+  
+  
+  
+ 5 使用jenkins
+  我创建的是maven项目。
+  添加项目的时候，需要配置jdk、git、maven
+  jdk 用which java 找到jdk路径，进行配置。
+  git用git命令地址即可
+  maven配置maven home  用mvn -version会有显示
+  添加tomcat tomcat需要配置用户
+  vi /你的tcomcat路径/conf/tomcat-users.xml
+  添加如下内容
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <user username="tomcat" password="tomcat" roles="manager-gui"/>
+  <user username="admin" password="123456" roles="manager-script"/>
+  
+  如果是tomcat8需要编辑或添加文件
+  vi /你的tomcat路径/conf/Catalina/localhost/manager.xml
+  <Context privileged="true" antiResourceLocking="false"
+         docBase="${catalina.home}/webapps/manager">
+    <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="^.*$" />
+  </Context>
+  启动后去构建程序，启动正常
+  
   
